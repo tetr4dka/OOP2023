@@ -1,20 +1,23 @@
-public class Main {
-    public static void main(String[] args) {
-        Workflow workflow = new Workflow();
-        VKeyboard vKeyboard = new VKeyboard(workflow);
+import java.util.Arrays;
 
-        Key a = new Key("A");
-        Key fn = new Key("Fn");
-        Key f3 = new Key("F3");
-        Combination combination1 = new Combination(fn.getKeyName() + "+" + f3.getKeyName());
-        Combination combination2 = new Combination(a.getKeyName() + "+" + fn.getKeyName());
-        vKeyboard.pressKey(a);
-        vKeyboard.pressCombination(combination1);
-        Key ctrl = new Key("Ctrl");
-        Key alt = new Key("Alt");
-        Key delete = new Key("Delete");
-        vKeyboard.changeCombination(combination1, combination2);
-        vKeyboard.pressCombination(combination1);
-        vKeyboard.reset();
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        VKeyboard keyboard = new VKeyboard();
+        Key key1 = new Key("X");
+        Key key2 = new Key("Y");
+        Key key3 = new Key("Z");
+        keyboard.addCommand(key3, new StringCommand("A"));
+        keyboard.addCommand(key1, new StringCommand("Hello,"));
+        keyboard.addCommand(key1, new StringCommand("World!"));
+        keyboard.addCommandGroup(key2, new Group(Arrays.asList(new StringCommand("Please"), new StringCommand("be"), new StringCommand("alright"))));
+        keyboard.pressKey(key1);
+        keyboard.pressKey(key3);
+        keyboard.pressKeyTimeLong(key2, 2);
+        keyboard.undoLastAction();
+
+        keyboard.pressKey(key2);
+
+        keyboard.remapKey(key2, key1);
+        keyboard.pressKey(key1);
     }
 }

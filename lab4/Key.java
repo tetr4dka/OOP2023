@@ -1,14 +1,14 @@
 public class Key {
-    private String keyName;
-    public Key(String keyName) {
-        this.keyName = keyName;
+    private String name;
+    public Key(String name) {
+        this.name = name;
     }
 
-    public String getKeyName() {
-        return keyName;
+    public String getName() {
+        return name;
     }
 
-    public void setKeyName(String keyName) {
-        this.keyName = keyName;
+    public void setName(String name) {
+        this.name = name;
     }
 }
